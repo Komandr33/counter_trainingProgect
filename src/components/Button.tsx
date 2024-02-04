@@ -3,6 +3,7 @@ import './Button'
 type ButtonType = {
   title: string
   onClick: () => void
+  isDisabled: boolean
 }
 
 export function Button(props: ButtonType) {
@@ -13,7 +14,7 @@ export function Button(props: ButtonType) {
 
   return (
     <span>
-        <button className={'button'} onClick={onClickHandler}>{props.title}</button>
+        <button className={'button'} disabled={props.isDisabled} onClick={onClickHandler}>{props.title}</button>
       </span>
   );
 }
