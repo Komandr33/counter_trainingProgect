@@ -14,7 +14,7 @@ export function Button(props: ButtonType) {
 
   return (
     <span>
-        <button className={'button'} disabled={props.isDisabled} onClick={onClickHandler}>{props.title}</button>
+        <button disabled={props.isDisabled} onClick={onClickHandler}>{props.title}</button>
       </span>
   );
 }

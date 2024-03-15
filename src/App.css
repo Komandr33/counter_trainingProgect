@@ -1,55 +1,55 @@
 .App {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  height: 1vh;
   margin-top: 250px;
   text-align: center;
+  color: deepskyblue;
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #202428;
+  font-family: "Comic Sans MS", sans-serif; /* устанавливает семейство шрифтов */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+input {
+  border: 3px solid deepskyblue;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+button {
+  font-family: "Comic Sans MS", sans-serif; /* устанавливает семейство шрифтов */
+  font-size: 20px; /* устанавливает размер шрифта */
+  font-weight: bold; /* устанавливает насыщенность шрифта (например, жирный) */
+  background: deepskyblue;
+  border: 1px solid deepskyblue;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-flow: column wrap;
+  border: 3px solid deepskyblue;
+  border-radius: 8px;
+  min-width: 300px;
+  margin: 10px;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.button {
-  flex-grow: 1;
-  margin-left: 44px;
-  width: 120px;
-  height: 40px;
-  background: #9cd99c;
-  border-radius: 10px;
-  text-align: center;
-  color: #070202;
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
+.element-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;;
+  margin: 10px;
 }

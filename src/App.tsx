@@ -34,14 +34,26 @@ function App() {
 
   return (
     <div className="App">
-      <div>{count}</div>
-      <Button isDisabled={isDisabled} title={'inc'} onClick={inc}/>
-      <Button isDisabled={isDisabled} title={'reset'} onClick={res}/>
-      <div>
-        <div>
-          <span> MAX VALUE <Input value={maxValue} onChange={addMaxValue}/></span>
-          <span> INIT VALUE <Input value={initValue} onChange={addInitValue}/></span>
-          <Button isDisabled={isDisabled} title={'SET'} onClick={saveValue}/>
+      <div className={'wrapper'}>
+        <div className={'wrapper'}>
+          <div className={'element-row'}>
+            <span> MAX VALUE</span>
+            <Input value={maxValue} onChange={addMaxValue}/>
+          </div>
+          <div className={'element-row'}>
+            <span> INIT VALUE</span>
+            <Input value={initValue} onChange={addInitValue}/>
+          </div>
+        </div>
+        <div className={'wrapper'}><Button isDisabled={isDisabled} title={'SET'} onClick={saveValue}/></div>
+      </div>
+      <div className={'wrapper'}>
+        <div className={'wrapper'}><h1>{count}</h1></div>
+        <div className={'wrapper'}>
+          <div>
+            <Button isDisabled={isDisabled} title={'inc'} onClick={inc}/>
+            <Button isDisabled={isDisabled} title={'reset'} onClick={res}/>
+          </div>
         </div>
       </div>
     </div>
