@@ -1,86 +1,83 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Button} from './components/Button';
-import {Input} from './components/Input';
+import './App.module.css';
+import {ExtensionCounter} from './components/extensionCounter/ExtensionCounter';
+import {Counter} from './components/counter/Counter';
+import S from './App.module.css'
 
+// const state = {
+//   countValue: 0,
+//   startValue: 0,
+//   maxValue: 0,
+//   extensionDisabled: true,
+//   counterDisabled: false
+// }
+//
+// type StateType = typeof state
 
-function App() {
-  const [count, setCount] = useState(0)
-  const [incIsDisabled, setIncIsDisabled] = useState(false)
-  const [resIsDisabled, setResIsDisabled] = useState(false)
-  const [buttonSetIsDisabled, setButtonSetIsDisabled] = useState(false)
-  const [value, setValue] = useState({startValue: 0, maxValue: 0})
-  const [error, setError] = useState('')
+export type DisabledType = {
+  setDisabled: boolean
+  incDisabled: boolean
+  resDisabled: boolean
+  error: boolean
+}
 
-  const incHandler = () => {
-    if (count === value.maxValue - 1) {
-      setIncIsDisabled(true)
-      styleValue = true
+export const App = () => {
+
+  const disValue = {
+    setDisabled: false,
+    incDisabled: true,
+    resDisabled: true,
+    error: false
+  }
+
+  const [extensionValue, setExtensionValue] = useState({start: 0, max: 0})
+  const [disabled, setDisabled] = useState<DisabledType>(disValue)
+  const [countValue, setCountValue] = useState(0)
+
+  const setValueHandler = (s: number, m: number) => {
+    setExtensionValue({...extensionValue, start: s, max: m})
+    setCountValue(s)
+    setDisabled({...disValue, setDisabled: true, incDisabled: false, resDisabled: false})
+  }
+
+  const countValueHandler = (v: number) => {
+    if (extensionValue.max === v) {
+      setDisabled({...disValue, setDisabled: true, resDisabled: false, incDisabled: true})
     }
-    setCount(count + 1)
+    setCountValue(v)
   }
 
-  const resHandler = () => {
-    setCount(value.startValue)
-    setIncIsDisabled(false)
+  const resetHandler = () => {
+    setCountValue(extensionValue.start)
+    setDisabled({...disValue, setDisabled: true, resDisabled: false, incDisabled: false})
   }
 
-  const addMaxValue = (v: number) => {
-    if (v >= 0) {
-      setValue({...value, maxValue: v})
-      setIncIsDisabled(true)
-      setResIsDisabled(true)
-      setError('')
-    }
-    setError('incorrect value!')
+  const setError = (e: boolean) => {
+    setDisabled({...disValue, error: e})
   }
 
-  const addStartValue = (v: number) => {
-    if (v >= 0) {
-      setValue({...value, startValue: v})
-      setIncIsDisabled(true)
-      setResIsDisabled(true)
-      setError('')
-    }
-    setError('incorrect value!')
+  const extensionDisabledHandler = (e: boolean) => {
+    setDisabled({...disValue, setDisabled: e})
   }
 
-  const saveValue = () => {
-    setCount(value.startValue)
-    setButtonSetIsDisabled(true)
-    setIncIsDisabled(false)
-    setResIsDisabled(false)
-  }
-
-  let val = buttonSetIsDisabled ? 'enter value and press \'set\'' : count
-  let styleValue = false
   return (
-    <div className="App">
-      <div className={'wrapper'}>
-        <div className={'wrapper'}>
-          <div className={'element-row'}>
-            <span> MAX VALUE</span>
-            <Input value={value.maxValue} onChange={addMaxValue}/>
-          </div>
-          <div className={'element-row'}>
-            <span> START VALUE</span>
-            <Input value={value.startValue} onChange={addStartValue}/>
-          </div>
-        </div>
-        <div className={'wrapper'}><Button isDisabled={buttonSetIsDisabled} title={'SET'} onClick={saveValue}/></div>
+    <div className={S.appWrapper}>
+      <div className={'container'}>
+        <ExtensionCounter disabled={disabled}
+                          setDisabled={extensionDisabledHandler}
+                          setError={setError}
+                          setValue={setValueHandler}
+                          error={disValue.error}
+        />
       </div>
-
-      <div className={'wrapper'}>
-        <div className={'wrapper'}><h1 className={styleValue ? 'maxVal' : ''}>{count ? count : val}</h1></div>
-        <div className={'wrapper'}>
-          <div>
-            <Button isDisabled={incIsDisabled} title={'inc'} onClick={incHandler}/>
-            <Button isDisabled={resIsDisabled} title={'reset'} onClick={resHandler}/>
-          </div>
-        </div>
+      <div className={'container'}>
+        <Counter value={countValue}
+                 maxValue={extensionValue.max}
+                 disabled={disabled}
+                 setIncrement={countValueHandler}
+                 reset={resetHandler}
+        />
       </div>
     </div>
   );
 }
-
-export default App;

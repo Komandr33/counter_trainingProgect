@@ -1,4 +1,5 @@
 import './Button'
+import S from './Button.module.css'
 
 type ButtonType = {
   title: string
@@ -13,8 +14,8 @@ export function Button(props: ButtonType) {
   }
 
   return (
-    <span>
-        <button disabled={props.isDisabled} onClick={onClickHandler}>{props.title}</button>
-      </span>
+    <div>
+      <button className={S.style} disabled={props.isDisabled} onClick={onClickHandler}>{props.title}</button>
+    </div>
   );
 }

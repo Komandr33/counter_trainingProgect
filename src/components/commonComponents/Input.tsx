@@ -13,7 +13,7 @@ export function Input(props: InputPropsType) {
 
   return (
     <div>
-      <input className={''} type={'number'} value={props.value} onChange={onChangeHandler}/>
+      <input type={'number'} value={props.value} onChange={onChangeHandler}/>
     </div>
   );
 }

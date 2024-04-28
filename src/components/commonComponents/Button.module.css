@@ -1,0 +1,17 @@
+.style {
+    font-family: "Comic Sans MS", sans-serif; /* устанавливает семейство шрифтов */
+    font-size: 20px; /* устанавливает размер шрифта */
+    font-weight: bold; /* устанавливает насыщенность шрифта (например, жирный) */
+    text-align: center;
+    background: deepskyblue;
+    border: none;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 8px 30px; /* отступы внутри кнопки */
+    cursor: pointer;
+    mix-blend-mode: difference; /* применение режима наложения для эффекта прозрачного текста */
+}
+
+.style:disabled {
+    filter: opacity(30%); /* добавление серого оттенка при дизейбле */
+}

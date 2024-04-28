@@ -1,6 +1,7 @@
 import {FC} from 'react';
-import {Button} from './Button';
-import {DisabledType} from '../App2';
+import {Button} from '../commonComponents/Button';
+import {DisabledType} from '../../App';
+import S from './Counter.module.css'
 
 type CounterPropsType = {
   value: number
@@ -20,11 +21,17 @@ export const Counter: FC<CounterPropsType> = (props) => {
     props.reset()
   }
 
-  return <div>
-    <div>
-      {props.disabled.error ? 'incorrect value!' : props.disabled.resDisabled ? 'enter value and press \'set\'' : props.value}
+  return <div className={S.outerWrapper}>
+    <div className={S.counterWrapper}>
+      {props.disabled.error
+        ? <p className={S.error}>incorrect value!</p>
+        : props.disabled.resDisabled
+          ? <p>enter value and press 'set'</p>
+          : props.value === props.maxValue
+            ? <h1 className={S.maxValue}>{props.value}</h1>
+            : props.value}
     </div>
-    <div>
+    <div className={S.buttonWrapper}>
       <Button title={'inc'} onClick={incOnClickHandler} isDisabled={props.disabled.incDisabled}/>
       <Button title={'reset'} onClick={resetOnClickHandler} isDisabled={props.disabled.resDisabled}/>
     </div>

@@ -1,0 +1,18 @@
+.appWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: deepskyblue;
+  font-family: sans-serif;
+  font-size: 30px;
+}
+
+body {
+  background-color: #26282c;
+  font-family: "Comic Sans MS", sans-serif; /* устанавливает семейство шрифтов */
+}
+
+
+
