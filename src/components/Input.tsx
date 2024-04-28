@@ -1,14 +1,14 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 
 type InputPropsType = {
-  value: string
-  onChange: (e: string) => void,
+  value: number
+  onChange: (e: number) => void
 }
 
 export function Input(props: InputPropsType) {
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-  props.onChange(e.currentTarget.value)
+    props.onChange(e.currentTarget.valueAsNumber) // получает значение как число, а не как строку
   }
 
   return (

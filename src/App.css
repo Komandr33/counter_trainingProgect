@@ -19,6 +19,13 @@ h1 {
   font-size: 40px;
 }
 
+.maxVal {
+  font-size: 50px;
+  color: red;
+  font-weight: bolder;
+}
+
+
 input {
   border: 3px solid deepskyblue;
   border-radius: 5px;
@@ -53,3 +60,4 @@ button {
   justify-content: space-around;;
   margin: 10px;
 }
+
