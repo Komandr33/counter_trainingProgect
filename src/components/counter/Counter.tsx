@@ -1,39 +1,46 @@
 import {FC} from 'react';
 import {Button} from '../commonComponents/Button';
 import {DisabledType} from '../../App';
-import S from './Counter.module.css'
+import s from './Counter.module.css'
+import {useDispatch} from 'react-redux';
+import {incCounter, resetCounter} from '../../state/counterRedcer';
 
 type CounterPropsType = {
   value: number
   maxValue: number
   disabled: DisabledType
-  setIncrement: (v: number) => void
-  reset: () => void
+  // setIncrement: (v: number) => void
+  // reset: () => void
 }
 
-export const Counter: FC<CounterPropsType> = (props) => {
+export const Counter: FC<CounterPropsType> = ({value, maxValue, disabled}) => {
 
+  const dispatch = useDispatch()
   const incOnClickHandler = () => {
-    props.setIncrement(props.value + 1)
+    console.log('+1')
+    debugger
+    dispatch(incCounter())
   }
 
   const resetOnClickHandler = () => {
-    props.reset()
+    dispatch(resetCounter())
   }
 
-  return <div className={S.outerWrapper}>
-    <div className={S.counterWrapper}>
-      {props.disabled.error
-        ? <p className={S.error}>incorrect value!</p>
-        : props.disabled.resDisabled
-          ? <p>enter value and press 'set'</p>
-          : props.value === props.maxValue
-            ? <h1 className={S.maxValue}>{props.value}</h1>
-            : props.value}
+  return <div className={s.outerWrapper}>
+    <div className={s.counterWrapper}>
+      {
+        // disabled.error
+        // ? <p className={s.error}>incorrect value!</p>
+        // : disabled.resDisabled
+        //   ? <p>enter value and press 'set'</p>
+        //   : value === maxValue
+        //     ? <h1 className={s.maxValue}>{value}</h1>
+        //     :
+              value}
     </div>
-    <div className={S.buttonWrapper}>
-      <Button title={'inc'} onClick={incOnClickHandler} isDisabled={props.disabled.incDisabled}/>
-      <Button title={'reset'} onClick={resetOnClickHandler} isDisabled={props.disabled.resDisabled}/>
+    <div className={s.buttonWrapper}>
+      <Button title={'inc'} onClick={incOnClickHandler} isDisabled={disabled.incDisabled}/>
+      <Button title={'reset'} onClick={resetOnClickHandler} isDisabled={disabled.resDisabled}/>
     </div>
   </div>
 }
