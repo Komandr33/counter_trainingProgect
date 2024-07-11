@@ -1,10 +1,8 @@
 import {combineReducers, legacy_createStore} from '@reduxjs/toolkit';
 import {counterReducer} from './counterRedcer';
-import {settingsReducer} from './settingsReducer';
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
-  settingsCounter: settingsReducer
+  counter: counterReducer
 })
 
 export const store = legacy_createStore(rootReducer)
