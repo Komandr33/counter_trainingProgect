@@ -1,9 +1,9 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
 import './App.module.css';
-import {ExtensionCounter} from './components/extensionCounter/ExtensionCounter';
+import {SettingsCounter} from './components/extensionCounter/SettingsCounter';
 import {Counter} from './components/counter/Counter';
 import S from './App.module.css'
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppStateType} from './state/store';
 
 // const state = {
@@ -16,18 +16,16 @@ import {AppStateType} from './state/store';
 //
 // type StateType = typeof state
 
-export type DisabledType = {
-  setDisabled: boolean
-  incDisabled: boolean
-  resDisabled: boolean
-  error: boolean
-}
+// export type DisabledType = {
+//   setDisabled: boolean
+//   incDisabled: boolean
+//   resDisabled: boolean
+//   error: boolean
+// }
 
 export const App = () => {
 
-  const dispatch = useDispatch()
   const count = useSelector((state: AppStateType) => state.counter)
-  const settings = useSelector((state: AppStateType) => state.settingsCounter)
 
   // const disValue = useMemo(() => {
   //   return {
@@ -85,20 +83,13 @@ export const App = () => {
   return (
     <div className={S.appWrapper}>
       <div className={'container'}>
-        <ExtensionCounter disabled={settings}
-                          // setDisabled={extensionDisabledHandler}
-                          // setError={setError}
-                          // setValue={setValueHandler}
-                          // error={disValue.error}
-        />
+        <SettingsCounter error={count.error}
+                         value={count.extensionValue}/>
       </div>
       <div className={'container'}>
         <Counter value={count.value}
                  maxValue={count.extensionValue.max}
-                 disabled={settings}
-                 // setIncrement={countValueHandler}
-                 // reset={resetHandler}
-        />
+                 error={count.error}/>
       </div>
     </div>
   );
