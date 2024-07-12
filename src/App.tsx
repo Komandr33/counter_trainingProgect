@@ -6,79 +6,9 @@ import S from './App.module.css'
 import {useSelector} from 'react-redux';
 import {AppStateType} from './state/store';
 
-// const state = {
-//   countValue: 0,
-//   startValue: 0,
-//   maxValue: 0,
-//   extensionDisabled: true,
-//   counterDisabled: false
-// }
-//
-// type StateType = typeof state
-
-// export type DisabledType = {
-//   setDisabled: boolean
-//   incDisabled: boolean
-//   resDisabled: boolean
-//   error: boolean
-// }
-
 export const App = () => {
 
   const count = useSelector((state: AppStateType) => state.counter)
-
-  // const disValue = useMemo(() => {
-  //   return {
-  //     setDisabled: false,
-  //     incDisabled: true,
-  //     resDisabled: true,
-  //     error: false
-  //   }
-  // }, [])
-  //
-  // const [extensionValue, setExtensionValue] = useState({start: 0, max: 0})
-  // const [disabled, setDisabled] = useState<DisabledType>(disValue)
-  // const [countValue, setCountValue] = useState(0)
-  //
-  // useEffect(() => {
-  //   let savedExtensionValue = localStorage.getItem('extension-counter');
-  //   if (savedExtensionValue) {
-  //     let value = JSON.parse(savedExtensionValue)
-  //     setExtensionValue(value)
-  //     setCountValue(value.start)
-  //   }
-  // }, [])
-  //
-  // useEffect(() => {
-  //   console.log(extensionValue)
-  //   localStorage.setItem('extension-counter', JSON.stringify(extensionValue))
-  // }, [extensionValue])
-  //
-  // const setValueHandler = (s: number, m: number) => {
-  //   setExtensionValue({...extensionValue, start: s, max: m})
-  //   setCountValue(s)
-  //   setDisabled({...disValue, setDisabled: true, incDisabled: false, resDisabled: false})
-  // }
-  //
-  // const countValueHandler = (v: number) => {
-  //   if (extensionValue.max === v) {
-  //     setDisabled({...disValue, setDisabled: true, resDisabled: false, incDisabled: true})
-  //   }
-  //   setCountValue(v)
-  // }
-  //
-  // const resetHandler = () => {
-  //   setCountValue(extensionValue.start)
-  //   setDisabled({...disValue, setDisabled: true, resDisabled: false, incDisabled: false})
-  // }
-  //
-  // const setError = (e: boolean) => {
-  //   setDisabled({...disValue, error: e})
-  // }
-  //
-  // const extensionDisabledHandler = (e: boolean) => {
-  //   setDisabled({...disValue, setDisabled: e})
-  // }
 
   return (
     <div className={S.appWrapper}>
@@ -89,7 +19,10 @@ export const App = () => {
       <div className={'container'}>
         <Counter value={count.value}
                  maxValue={count.extensionValue.max}
-                 error={count.error}/>
+                 error={count.error}
+                 disInc={count.disInc}
+                 disReset={count.disReset}
+        />
       </div>
     </div>
   );
