@@ -5,24 +5,25 @@ import s from './ExtensionCounter.module.css'
 import {useDispatch} from 'react-redux';
 import {
   disabledInc,
-  disabledReset,
+  disabledReset, disabledSet,
   extensionValueType,
   setError,
   setSettings,
   updateSettings
-} from '../../state/counterRedcer';
+} from '../../state/counterReducer';
 
 type SettingsCounterPropsType = {
   error: boolean
   value: extensionValueType
+  disSet: boolean
 }
 
-export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value}) => {
+export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value, disSet}) => {
 
   const dispatch = useDispatch()
 
   const validateValues = (start: number, max: number) => {
-    return start < 0 || max < 0 || start >= max;
+    return start < 0 || start >= max;
   }
 
   const maxValueOnChangeHandler = (v: number) => {
@@ -41,6 +42,7 @@ export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value}) =>
 
   const buttonOnClickHandler = () => {
     dispatch(setSettings(value.start))
+    dispatch(disabledSet(true))
     dispatch(disabledInc(false))
     dispatch(disabledReset(false))
   }
@@ -54,7 +56,7 @@ export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value}) =>
     </div>
     <div className={s.wrapper}>
       <Button title={'set'} onClick={buttonOnClickHandler}
-              isDisabled={false}/>
+              isDisabled={disSet}/>
     </div>
   </div>
 }

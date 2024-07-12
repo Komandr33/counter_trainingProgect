@@ -14,7 +14,9 @@ export const App = () => {
     <div className={S.appWrapper}>
       <div className={'container'}>
         <SettingsCounter error={count.error}
-                         value={count.extensionValue}/>
+                         value={count.extensionValue}
+                         disSet={count.disSet}
+        />
       </div>
       <div className={'container'}>
         <Counter value={count.value}
