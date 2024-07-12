@@ -3,7 +3,14 @@ import {Button} from '../commonComponents/Button';
 import {Input} from '../commonComponents/Input';
 import s from './ExtensionCounter.module.css'
 import {useDispatch} from 'react-redux';
-import {extensionValueType, setError, setSettings, updateSettings} from '../../state/counterRedcer';
+import {
+  disabledInc,
+  disabledReset,
+  extensionValueType,
+  setError,
+  setSettings,
+  updateSettings
+} from '../../state/counterRedcer';
 
 type SettingsCounterPropsType = {
   error: boolean
@@ -14,26 +21,28 @@ export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value}) =>
 
   const dispatch = useDispatch()
 
+  const validateValues = (start: number, max: number) => {
+    return start < 0 || max < 0 || start >= max;
+  }
+
   const maxValueOnChangeHandler = (v: number) => {
-    if (value.start === value.max || value.start > value.max || value.max < 0) {
-      dispatch(setError(true))
-    } else {
-      dispatch(setError(false))
-    }
-    dispatch(updateSettings({...value, max: v}))
+    const newValue = {...value, max: v};
+    const hasError = validateValues(newValue.start, newValue.max);
+    dispatch(setError(hasError));
+    dispatch(updateSettings(newValue));
   }
 
   const startValueOnChangeHandler = (v: number) => {
-    if (value.start === value.max || value.start > value.max || value.start < 0) {
-      dispatch(setError(true))
-    } else {
-      dispatch(setError(false))
-    }
-    dispatch(updateSettings({...value, start: v}))
+    const newValue = {...value, start: v};
+    const hasError = validateValues(newValue.start, newValue.max);
+    dispatch(setError(hasError));
+    dispatch(updateSettings(newValue));
   }
 
   const buttonOnClickHandler = () => {
     dispatch(setSettings(value.start))
+    dispatch(disabledInc(false))
+    dispatch(disabledReset(false))
   }
 
   return <div className={s.outerWrapper}>
