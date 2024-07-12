@@ -1,5 +1,5 @@
 import {combineReducers, legacy_createStore} from '@reduxjs/toolkit';
-import {counterReducer} from './counterRedcer';
+import {counterReducer} from './counterReducer';
 
 const rootReducer = combineReducers({
   counter: counterReducer
