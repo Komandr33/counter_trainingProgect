@@ -3,14 +3,7 @@ import {Button} from '../commonComponents/Button';
 import {Input} from '../commonComponents/Input';
 import s from './ExtensionCounter.module.css'
 import {useDispatch} from 'react-redux';
-import {
-  disabledInc,
-  disabledReset, disabledSet,
-  extensionValueType,
-  setError,
-  setSettings,
-  updateSettings
-} from '../../state/counterReducer';
+import {extensionValueType, setError, setSettings, updateSettings} from '../../state/counterReducer';
 
 type SettingsCounterPropsType = {
   error: boolean
@@ -41,10 +34,8 @@ export const SettingsCounter: FC<SettingsCounterPropsType> = ({error, value, dis
   }
 
   const buttonOnClickHandler = () => {
-    dispatch(setSettings(value.start))
-    dispatch(disabledSet(true))
-    dispatch(disabledInc(false))
-    dispatch(disabledReset(false))
+    dispatch(setSettings())
+    localStorage.setItem('Counter settings', JSON.stringify(value))
   }
 
   return <div className={s.outerWrapper}>

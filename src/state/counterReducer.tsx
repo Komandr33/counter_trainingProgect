@@ -4,7 +4,7 @@ const initialState = {
   disInc: true,
   disReset: true,
   disSet: true,
-  error: true
+  error: false
 }
 
 export type extensionValueType = { start: number, max: number }
@@ -20,9 +20,9 @@ type counterType = {
 export const counterReducer = (state: counterType = initialState, action: ActionsType): counterType => {
   switch (action.type) {
     case 'UPDATE-SETTINGS':
-      return {...state, extensionValue: {...action.val}, disSet: false}
+      return {...state, disInc: true, disReset: true, extensionValue: {...action.val}}
     case 'SET-SETTINGS':
-      return {...state, value: action.val}
+      return {...state, value: state.extensionValue.start, disInc: false, disReset: false, disSet: true}
     case 'INC-COUNTER':
       return {...state, value: state.value + 1}
     case 'RESET-COUNTER':
@@ -33,21 +33,21 @@ export const counterReducer = (state: counterType = initialState, action: Action
       return {...state, disReset: action.val}
     case 'DISABLED-SET':
       return {...state, disSet: action.val}
-    case 'ERROR':
-      return {...state, error: action.val}
+    case 'SET-ERROR':
+      return {...state, disSet: action.val, error: action.val}
     default:
       return state
   }
 }
 
 export const updateSettings = (val: extensionValueType) => ({type: 'UPDATE-SETTINGS', val} as const)
-export const setSettings = (val: number) => ({type: 'SET-SETTINGS', val} as const)
+export const setSettings = () => ({type: 'SET-SETTINGS'} as const)
 export const incCounter = () => ({type: 'INC-COUNTER'} as const)
 export const resetCounter = () => ({type: 'RESET-COUNTER'} as const)
 export const disabledSet = (val: boolean) => ({type: 'DISABLED-SET', val} as const)
 export const disabledInc = (val: boolean) => ({type: 'DISABLED-INC', val} as const)
 export const disabledReset = (val: boolean) => ({type: 'DISABLED-RESET', val} as const)
-export const setError = (val: boolean) => ({type: 'ERROR', val} as const)
+export const setError = (val: boolean) => ({type: 'SET-ERROR', val} as const)
 
 type ActionsType =
   | updateValueType
